@@ -33,7 +33,18 @@
        (match p
          ['add1 (Add 'rax (value->bits 1))]
          ['sub1 (Sub 'rax (value->bits 1))]
-         ;; TODO: Handle abs, -, and not
+         ['abs  (let ((l1 (gensym 'abs)))
+                      (seq 
+                           (Cmp 'rax (value->bits 0))
+                           (Jg l1)
+                           (Mov 'rdx 'rax)
+                           (Mov 'rax (value->bits 0))
+                           (Sub 'rax 'rdx)
+                           (Label l1)))]
+         ['neg (seq (Mov 'rdx 'rax)
+                    (Mov 'rax (value->bits 0))
+                    (Sub 'rax 'rdx))]
+         ['not (compile-if e (Bool #f) (Bool #t))]
          ['zero?
           (let ((l1 (gensym 'nzero)))
             (seq (Cmp 'rax 0)
