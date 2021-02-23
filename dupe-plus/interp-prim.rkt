@@ -7,5 +7,8 @@
     ['add1  (add1 v)]
     ['sub1  (sub1 v)]
     ['zero? (zero? v)]
+    ['abs (abs v)]
+    ['neg (- 0 v)]
+    ['not (not v)]
     ;; TODO: Handle abs, -, and not
     ))

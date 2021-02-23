@@ -17,5 +17,6 @@
 (struct Bool (b)      #:prefab)
 (struct Prim1 (p e)   #:prefab)
 (struct If (e1 e2 e3) #:prefab)
-
+(struct Cond (cs)         #:prefab)
+(struct Clause (e1 e2)    #:prefab)
 

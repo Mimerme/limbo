@@ -27,7 +27,27 @@
        (match p
          ['add1 (Add 'rax 1)]
          ['sub1 (Sub 'rax 1)]
-         ;; TODO: Handle abs and -
+         ['abs  (let ((l1 (gensym 'abs)))
+                      (seq 
+                           (Cmp 'rax 0)
+                           (Jg l1)
+                           (Mov 'rdx 'rax)
+                           (Mov 'rax 0)
+                           (Sub 'rax 'rdx)
+                           (Label l1)))]
+
+          
+;;          (let ((l1 (gensym 'abs)))
+;;                    (Cmp 'rax 0)
+;;                    (Jg l1)
+;;                    (Mov 'rdx 'rax)
+;;                    (Mov 'rax 0)
+;;                    (Sub 'rax 'rdx)
+;;                    (Label l1))]
+
+         ['neg (seq (Mov 'rdx 'rax)
+                    (Mov 'rax 0)
+                    (Sub 'rax 'rdx))]
          )))
 
 ;; Expr Expr Expr -> Asm
